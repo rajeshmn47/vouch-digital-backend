@@ -17,14 +17,14 @@ router.post(
   catchasyncerror(async (req, res, next) => {
     console.log("hi boy");
     console.log(req.body);
-    const { username, password,email } = req.body.myform;
+    const { username, password, email } = req.body.myform;
     var passwordToSave = bcrypt.hashSync(password, salt);
     console.log(passwordToSave);
 
     const user = await User.create({
       username: username,
       password: passwordToSave,
-      email:email
+      email: email,
     });
     const server_token = jwt.sign({ uid: user._id }, server_secret_key);
     res.status(200).json({
