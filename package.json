@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "fake-email": "^0.0.3",
+    "fake-identity-generator": "^1.0.5",
+    "fake-name": "^1.0.0",
+    "fake-names": "^1.0.5",
+    "mongoose": "^6.3.0",
+    "namerr": "^1.0.5",
+    "uninstall": "^0.0.0"
+  }
+}
