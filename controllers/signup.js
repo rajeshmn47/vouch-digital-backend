@@ -17,7 +17,7 @@ router.post(
   catchasyncerror(async (req, res, next) => {
     console.log("hi boy");
     console.log(req.body);
-    const { username, password, email } = req.body;
+    const { username, password, email } = req.body.myform;
     var passwordToSave = bcrypt.hashSync(password, salt);
     console.log(passwordToSave);
 
