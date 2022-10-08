@@ -2,10 +2,10 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
-const User = require("./model");
+const User = require("./models/user");
 const userscontroller = require("./controllers");
 const bodyParser = require("body-parser");
-const multer = require('multer')
+const multer = require("multer");
 const dotenv = require("dotenv");
 const helmet = require("helmet");
 const morgan = require("morgan");
@@ -36,21 +36,21 @@ mongoose.connect(
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'public/images')
+    cb(null, "public/images");
   },
   filename: (req, file, cb) => {
-    cb(null, req.body.name)
+    cb(null, req.body.name);
   },
-})
+});
 
-const upload = multer({ storage: storage })
-app.post('/api/upload', upload.single('file'), (req, res) => {
+const upload = multer({ storage: storage });
+app.post("/api/upload", upload.single("file"), (req, res) => {
   try {
-    return res.status(200).json('File uploded successfully')
+    return res.status(200).json("File uploded successfully");
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
-})
+});
 
 app.get("/", async (req, res) => {
   res.send("API running success");

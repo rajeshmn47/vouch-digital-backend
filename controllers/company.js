@@ -1,37 +1,39 @@
-const User = require("./models/Company");
+const Company = require("./models/Company");
 const bodyParser = require("body-parser");
 var express = require("express");
 const router = express.Router();
 
-router.get("/getallusers", async function (req, res) {
+router.get("/getallclients", async function (req, res) {
   console.log(req.query.page);
   const page = req.query.page ? req.query.page : 1;
-  const users = await User.find();
+  const clients = await Company.find();
   res.status(200).json({
-    users: users.slice((page - 1) * 5, page * 5),
-    pagecount: users.length,
+    clients: clients.slice((page - 1) * 5, page * 5),
+    pagecount: clients.length,
     rajesh: "mn",
   });
 });
 
-router.post("/createuser", async function (req, res) {
-  const { name, email, phonenumber, company } = req.body;
-  const user = User({
+router.post("/creatclient", async function (req, res) {
+  const { name, email, phonenumber, company, image, website } = req.body;
+  const user = Client({
     name: name,
     email: email,
     phonenumber: phonenumber,
     company: company,
+    image: image,
+    website: website,
   });
   await user.save();
 
   res.status(200).json({
-    users: "useddr",
+    clients: "useddr",
   });
 });
 
-router.post("/edituser", async function (req, res) {
+router.post("/editclient", async function (req, res) {
   console.log(req.body, "rajesh");
-  const user = await User.findById(req.body.id);
+  const user = await Client.findById(req.body.id);
   const { name, email, phonenumber, company } = req.body;
   const u = user({
     name: name,
@@ -46,9 +48,9 @@ router.post("/edituser", async function (req, res) {
   });
 });
 
-router.get("/deleteuser/:id", async function (req, res) {
+router.get("/deleteclient/:id", async function (req, res) {
   console.log(req.params.id);
-  const user = await User.findById(req.params.id);
+  const user = await Client.findById(req.params.id);
   await user.remove();
   res.status(200).json({
     deleted: "ok",
