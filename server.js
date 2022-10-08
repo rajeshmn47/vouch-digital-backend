@@ -3,7 +3,8 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const User = require("./models/user");
-const userscontroller = require("./controllers");
+const clientscontroller = require("./controllers/company");
+const authcontroller = require("./controllers/signup");
 const bodyParser = require("body-parser");
 const multer = require("multer");
 const dotenv = require("dotenv");
@@ -18,8 +19,8 @@ app.use(
     origin: "*",
   })
 );
-app.use("/user/", userscontroller);
-
+app.use("/client/", clientscontroller);
+app.use("/auth/", authcontroller);
 const ATLAS_URI =
   "mongodb+srv://rajeshmn47:uni1ver%40se@cluster0.bpxam.mongodb.net/assignmentvouch?retryWrites=true&w=majority";
 
@@ -44,7 +45,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-app.post("/api/upload", upload.single("file"), (req, res) => {
+app.post("/client/upload", upload.single("file"), (req, res) => {
   try {
     return res.status(200).json("File uploded successfully");
   } catch (error) {

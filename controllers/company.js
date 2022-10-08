@@ -1,4 +1,4 @@
-const Company = require("./models/Company");
+const Client = require("../models/client");
 const bodyParser = require("body-parser");
 var express = require("express");
 const router = express.Router();
