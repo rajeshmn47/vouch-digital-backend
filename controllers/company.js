@@ -36,12 +36,14 @@ router.post("/createclient", async function (req, res) {
 router.post("/editclient", async function (req, res) {
   console.log(req.body, "rajesh");
   const user = await Client.findById(req.body.id);
-  const { name, email, phonenumber, company } = req.body;
+  const { name, email, phonenumber, company,image,website } = req.body;
   const u = user({
     name: name,
     email: email,
     phonenumber: phonenumber,
     company: company,
+    website:website,
+    image:image
   });
   await u.save();
   res.status(200).json({
@@ -51,7 +53,7 @@ router.post("/editclient", async function (req, res) {
 });
 
 router.get("/deleteclient/:id", async function (req, res) {
-  console.log(req.params.id);
+  console.log(req.params.id,'rajeshhgffddasddfg');
   const user = await Client.findById(req.params.id);
   await user.remove();
   res.status(200).json({
