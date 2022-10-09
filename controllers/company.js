@@ -6,7 +6,7 @@ const router = express.Router();
 router.get("/getallclients", async function (req, res) {
   console.log(req.query.page);
   const page = req.query.page ? req.query.page : 1;
-  console.log('rajesh')
+  console.log("rajesh");
   const clients = await Client.find();
   res.status(200).json({
     clients: clients.slice((page - 1) * 5, page * 5),
@@ -16,7 +16,7 @@ router.get("/getallclients", async function (req, res) {
 });
 
 router.post("/createclient", async function (req, res) {
-  console.log('i am rajesh')
+  console.log("i am rajesh");
   const { name, email, phonenumber, company, image, website } = req.body;
   const user = Client({
     name: name,
@@ -36,16 +36,15 @@ router.post("/createclient", async function (req, res) {
 router.post("/editclient", async function (req, res) {
   console.log(req.body, "rajesh");
   const user = await Client.findById(req.body.id);
-  const { name, email, phonenumber, company,image,website } = req.body;
-  const u = user({
-    name: name,
-    email: email,
-    phonenumber: phonenumber,
-    company: company,
-    website:website,
-    image:image
-  });
-  await u.save();
+  const { name, email, phonenumber, company, image, website } = req.body;
+  user.name = name;
+  user.email = email;
+  user.phonenumber = phonenumber;
+  user.company = company;
+  user.website = website;
+  user.image = image;
+
+  await user.save();
   res.status(200).json({
     users: "user",
     id: req.body,
@@ -53,7 +52,7 @@ router.post("/editclient", async function (req, res) {
 });
 
 router.get("/deleteclient/:id", async function (req, res) {
-  console.log(req.params.id,'rajeshhgffddasddfg');
+  console.log(req.params.id, "rajeshhgffddasddfg");
   const user = await Client.findById(req.params.id);
   await user.remove();
   res.status(200).json({

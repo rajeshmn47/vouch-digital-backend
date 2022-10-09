@@ -12,7 +12,7 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'))
+app.use(express.static("public"));
 app.use(express.json());
 const url = "http://localhost:3000";
 app.use(
