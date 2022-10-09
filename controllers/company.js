@@ -6,7 +6,8 @@ const router = express.Router();
 router.get("/getallclients", async function (req, res) {
   console.log(req.query.page);
   const page = req.query.page ? req.query.page : 1;
-  const clients = await Company.find();
+  console.log('rajesh')
+  const clients = await Client.find();
   res.status(200).json({
     clients: clients.slice((page - 1) * 5, page * 5),
     pagecount: clients.length,
@@ -14,7 +15,8 @@ router.get("/getallclients", async function (req, res) {
   });
 });
 
-router.post("/creatclient", async function (req, res) {
+router.post("/createclient", async function (req, res) {
+  console.log('i am rajesh')
   const { name, email, phonenumber, company, image, website } = req.body;
   const user = Client({
     name: name,
