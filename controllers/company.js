@@ -34,7 +34,6 @@ router.post("/createclient", async function (req, res) {
 });
 
 router.post("/editclient", async function (req, res) {
-  console.log(req.body, "rajesh");
   const user = await Client.findById(req.body.id);
   const { name, email, phonenumber, company, image, website } = req.body;
   user.name = name;
